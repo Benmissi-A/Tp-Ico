@@ -25,7 +25,7 @@ describe('TP-Calculator', function () {
     await tpcalculator.deployed();
   });
 
-  describe('Tp-calculator', function () {
+  describe('Functions', function () {
     this.beforeEach(async function () {
       await tptoken.connect(dev).transfer(alice.address, ethers.utils.parseEther('2000000000'));
       await tptoken.connect(alice).approve(tpcalculator.address, ethers.utils.parseEther('2000000000'));

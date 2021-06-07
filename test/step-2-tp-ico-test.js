@@ -24,7 +24,7 @@ describe('TP-ICO', function () {
       expect(await tptico.name()).to.equal(NAME);
     });
   });
-  describe('ICO contract', function () {
+  describe('Functions', function () {
     this.beforeEach(async function () {
       await tptoken.approve(tptico.address, ethers.utils.parseEther('2000000000'));
     });
