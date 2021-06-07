@@ -4,7 +4,7 @@
 /* eslint-disable no-unused-vars */
 const { expect } = require('chai');
 
-describe('TP-Token and TP-ICO', function () {
+describe('TP-ICO', function () {
   let Tptoken, tptoken, Tptico, tptico, dev, owner, alice, bob, eve;
   const NAME = 'tptoken';
   const NAME_ICO = 'Tptico';
