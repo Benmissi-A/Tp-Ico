@@ -4,6 +4,13 @@ pragma solidity ^0.8.0;
 
 import "./Tp-token.sol";
 import "@openzeppelin/contracts/utils/Address.sol";
+/**
+ * @title ico contract
+ *
+ *@notice contract allow to buy tokens from {Tptoken} contract
+ *
+ */
+
 
 contract Tptico {
     using Address for address payable;
@@ -21,16 +28,22 @@ contract Tptico {
         _name = name_;
         _timeInit = block.timestamp;
     }
-
+/**
+*@notice payable from metamask
+ */
 
     receive() external payable {
         _buyTokens();
     }
-
+/**
+*@notice to buy tokens 
+ */
     function buyTokens() external payable {
         _buyTokens();
     }
-
+/**
+*@notice private buyToken function used in payable functions
+ */
     function _buyTokens() private {
         require(_tptoken.allowance(_tptoken.owner(), address(this)) > 0, "Tptico: no more token to buy");
         require(block.timestamp < (_timeInit + 15 days), "Tptico: sorry the ico is closed");
@@ -46,6 +59,9 @@ contract Tptico {
         emit Bought(msg.sender, tokenValue);
     }
 
+/**
+*@notice the owner of the ERC20 can withdraw the ethers
+ */
     function withdraw() external payable {
         require(msg.sender == _tptoken.owner(), "Tptico: only owner can withdraw");
         require(block.timestamp >= (_timeInit + 15 days), "Tptico: sorry be more patient");
@@ -53,6 +69,10 @@ contract Tptico {
         payable(_tptoken.owner()).sendValue(address(this).balance);
         emit Withdrew(_tptoken.owner(), balance);
     }
+
+    /**
+    *@notice  get the name of the ico
+     */
 
     function name() public view returns (string memory) {
         return _tptoken.name();
