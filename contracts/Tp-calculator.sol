@@ -11,50 +11,61 @@ import "./Tp-token.sol";
  *
  */
 
-
 contract Tpcalculator {
     Tptoken private _tptoken;
 
+    /**
+@notice Calculated event is emitted when a function is used in place of the return
+ */
     event Calculated(string operator, int256 nb1, int256 nb2, int256 result);
+
+    /**
+@notice Transfered event is emitted when a function is used to see the transaction
+ */
     event Transfered(address sender, address recipient, int256 amount);
 
     constructor(address tptokenAdress_) {
         _tptoken = Tptoken(tptokenAdress_);
     }
-/**
-*@notice do addition in exchange of 1 token
- */
+
+    /**
+     *@notice do addition in exchange of 1 token
+     */
     function add(int256 a, int256 b) public {
         _tptoken.transferFrom(msg.sender, _tptoken.owner(), 1**18);
         emit Calculated("add", a, b, a + b);
     }
-/**
-*@notice do substraction in exchange of 1 token
- */
+
+    /**
+     *@notice do substraction in exchange of 1 token
+     */
     function sub(int256 a, int256 b) public {
         _tptoken.transferFrom(msg.sender, _tptoken.owner(), 1**18);
         emit Calculated("sub", a, b, a - b);
     }
 
-/**
-*@notice do multiplication in exchange of 1 token
- */
+    /**
+     *@notice do multiplication in exchange of 1 token
+     */
     function mul(int256 a, int256 b) public {
         _tptoken.transferFrom(msg.sender, _tptoken.owner(), 1**18);
         emit Calculated("mul", a, b, a * b);
     }
-/**
-*@notice do division in exchange of 1 token
- */
+
+    /**
+     *@notice do division in exchange of 1 token
+     *@dev require the divider different from 0
+     */
     function div(int256 a, int256 b) public {
         require(b != 0, "Tpcalculator: can not divide by 0");
         _tptoken.transferFrom(msg.sender, _tptoken.owner(), 1**18);
         emit Calculated("div", a, b, a / b);
     }
 
-/**
-*@notice do modulo in exchange of 1 token
- */
+    /**
+     *@notice do modulo in exchange of 1 token
+     *@dev require the divider different from 0
+     */
     function mod(int256 a, int256 b) public {
         require(b != 0, "Tpcalculator: can not divide by 0");
         _tptoken.transferFrom(msg.sender, _tptoken.owner(), 1**18);
